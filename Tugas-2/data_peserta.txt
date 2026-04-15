@@ -1,0 +1,7 @@
+Data Peserta Bootcamp Digital Skill Devops
+1. Nama: Vanilia
+2. Email: vanilia.cahya23@gmail.com
+3. Sistem Operasi yang digunakan: Windows
+4. Akun Gitlab/Github: vaniliacahya
+5. Akun Telegram: @vaniliacahya
+6. Bahasa Pemrograman/Stack Yang dikuasai: Golang, Python
