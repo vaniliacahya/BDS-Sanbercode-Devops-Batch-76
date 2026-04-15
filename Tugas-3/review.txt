@@ -1,0 +1,40 @@
+1. Analisa dari AI
+- Setiap kali script dijalankan, file syslog.txt akan selalu ditimpa oleh file yang baru, jadi resiko overwrite
+- Tidak ada handling error ketika syslog.txt tidak ditemukan
+- Script yang sudah dibuat selalu berasumsi bahwa akan dijalankan persis di direktori tempat syslog.txt berada
+- Kurang umpan balik, apakah proses sudah selesai atau belum
+
+2. Saran perbaikan dari AI
+
+#!/bin/bash
+
+# Mendefinisikan variabel agar mudah diubah jika diperlukan
+LOG_FILE="syslog.txt"
+BACKUP_DIR="backup-log"
+
+# Membuat format waktu (Contoh: 2026-04-16_02-26-54)
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+BACKUP_FILE="${BACKUP_DIR}/syslog_${TIMESTAMP}.txt"
+
+echo "Memulai backup log..."
+
+# 1. Cek apakah file sumber eksis
+if [ ! -f "$LOG_FILE" ]; then
+    echo "Error: File '$LOG_FILE' tidak ditemukan! Backup dibatalkan."
+    exit 1
+fi
+
+# 2. Buat direktori backup jika belum ada
+mkdir -p "$BACKUP_DIR"
+
+# 3. Eksekusi copy dengan nama file baru berdasarkan waktu
+if cp "$LOG_FILE" "$BACKUP_FILE"; then
+    echo "Sukses: Backup berhasil disimpan ke '$BACKUP_FILE'"
+else
+    echo "Error: Gagal melakukan copy file."
+    exit 1
+fi
+
+
+3. Pendapat mengenai hasil review AI
+- Saya setuju, karna script yang saya buat terlalu basic, dan dengan saran yang diberikan saya mendapat insight yang lebih luas terkait prompting di terminal
