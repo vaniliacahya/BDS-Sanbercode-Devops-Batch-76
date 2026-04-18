@@ -1,0 +1,193 @@
+/* =============================================
+   portofolio.css — Page-specific styles
+   Requires style.css to be loaded first
+   ============================================= */
+
+/* PAGE HERO */
+.page-hero {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 64px 5% 48px;
+    text-align: center;
+    animation: fadeInUp 0.7s ease both;
+}
+.page-hero-inner { max-width: 720px; margin: 0 auto; }
+.page-hero-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 14px;
+    line-height: 1.2;
+}
+.page-hero-sub {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 36px;
+    line-height: 1.7;
+}
+
+/* FILTER TABS */
+.filter-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.filter-btn {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 2px solid var(--color-border);
+    background-color: var(--color-white);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition);
+    box-sizing: border-box;
+}
+.filter-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.filter-btn.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+    box-shadow: 0 4px 12px rgba(245,166,35,0.35);
+}
+.filter-btn:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+
+/* PORTFOLIO SECTION */
+.porto-section { padding: 60px 5% 80px; }
+.porto-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+/* CARD */
+.porto-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 calc(33.333% - 28px);
+    min-width: 280px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: opacity 0.2s ease, transform 0.25s ease, box-shadow var(--transition);
+    animation: fadeInUp 0.6s ease both;
+}
+.porto-card:nth-child(1){animation-delay:.05s}
+.porto-card:nth-child(2){animation-delay:.10s}
+.porto-card:nth-child(3){animation-delay:.15s}
+.porto-card:nth-child(4){animation-delay:.20s}
+.porto-card:nth-child(5){animation-delay:.25s}
+.porto-card:nth-child(6){animation-delay:.30s}
+.porto-card:nth-child(7){animation-delay:.35s}
+.porto-card:nth-child(8){animation-delay:.40s}
+
+.porto-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); }
+
+/* Card Image */
+.porto-card-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background-color: var(--color-surface);
+}
+.porto-card-image img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.5s ease;
+}
+.porto-card:hover .porto-card-image img { transform: scale(1.07); }
+
+/* Overlay */
+.porto-card-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(26,26,46,0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+.porto-card:hover .porto-card-overlay { opacity: 1; }
+
+.porto-card-link {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    text-decoration: none;
+    transform: translateY(12px);
+    transition: background-color var(--transition), color var(--transition), transform var(--transition);
+}
+.porto-card:hover .porto-card-link { transform: translateY(0); }
+.porto-card:hover .porto-card-link:nth-child(2) { transition-delay: 0.06s; }
+.porto-card-link:hover { background-color: var(--color-primary); color: var(--color-white); }
+
+/* Card Body */
+.porto-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px 22px 22px;
+}
+.porto-card-tag {
+    display: inline-block;
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--color-primary-dark);
+    background-color: #fff5e4;
+    border: 1px solid #fde0a8;
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+.porto-card-title {
+    font-size: 1rem; font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 8px; line-height: 1.4;
+}
+.porto-card-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+/* Tech badges */
+.porto-card-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.porto-card-tech span {
+    font-size: 0.72rem; font-weight: 500;
+    color: var(--color-text-muted);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 3px 9px;
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+.porto-card-tech span:hover {
+    background-color: var(--color-text);
+    color: var(--color-white);
+    border-color: var(--color-text);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) { .porto-card { flex: 1 1 calc(50% - 28px); } }
+@media (max-width: 560px) {
+    .porto-card { flex: 1 1 100%; }
+    .page-hero { padding: 40px 5% 32px; }
+    .filter-btn { font-size: 0.8rem; padding: 6px 14px; }
+}

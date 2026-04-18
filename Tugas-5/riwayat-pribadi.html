@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Pribadi | Vanilia</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="./assets/css/style.css" rel="stylesheet">
+    <link href="./assets/css/riwayat.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Semantic Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo">
+                <img src="./assets/img/logo.png" alt="Portofolio Logo" width="150">
+            </div>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="riwayat-pribadi.html" class="nav-link active">Riwayat Pribadi</a></li>
+                    <li><a href="portofolio.html" class="nav-link">Portofolio</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="riwayat-section" aria-label="Riwayat Pribadi">
+            <div class="riwayat-inner">
+
+                <!-- LEFT COLUMN -->
+                <div class="riwayat-left">
+
+                    <!-- Profile Card -->
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <h2 class="profile-name">Vanilia Cahya</h2>
+                        <span class="profile-role">Backend Engineer · Golang</span>
+                    </div>
+
+                    <!-- Motto Card -->
+                    <div class="motto-card">
+                        <div class="motto-icon">
+                            <i class="fa-solid fa-quote-left"></i>
+                        </div>
+                        <blockquote class="motto-text">
+                            <q>First, solve the problem. Then, write the code.</q>
+                        </blockquote>
+                        <cite class="motto-author">—claude.ai</cite>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="riwayat-right">
+
+                    <!-- Data Diri -->
+                    <div class="riwayat-card">
+                        <h2 class="riwayat-card-title">
+                            <i class="fa-solid fa-id-card"></i> Data Diri
+                        </h2>
+                        <table class="info-table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><i class="fa-solid fa-user fa-fw"></i> Nama</th>
+                                    <td>Vanili</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><i class="fa-solid fa-heart fa-fw"></i> Hobi</th>
+                                    <td>Coding, Bersih-bersih</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Riwayat Pendidikan -->
+                    <div class="riwayat-card">
+                        <h2 class="riwayat-card-title">
+                            <i class="fa-solid fa-graduation-cap"></i> Riwayat Pendidikan
+                        </h2>
+                        <table class="edu-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama Institusi</th>
+                                    <th scope="col">Tahun Lulus</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Universitas Brawijaya</td>
+                                    <td>2019</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>SMA Negeri 3 Malang</td>
+                                    <td>2015</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>SMP Negeri 5 Malang</td>
+                                    <td>2012</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pengalaman Kerja -->
+                    <div class="riwayat-card">
+                        <h2 class="riwayat-card-title">
+                            <i class="fa-solid fa-briefcase"></i> Pengalaman Kerja
+                        </h2>
+                        <ul class="timeline">
+                            <li class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-period">2025 – Sekarang</span>
+                                    <h3 class="timeline-role">Backend Engineer</h3>
+                                    <p class="timeline-company">Mavens</p>
+                                    <p class="timeline-desc">Mengembangkan fitur ERP</p>
+                                </div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-period">2022 – 2025</span>
+                                    <h3 class="timeline-role">Backend Developer</h3>
+                                    <p class="timeline-company">Smartlink</p>
+                                    <p class="timeline-desc">Mengembangkan fitur backend untuk platform laundry, POS, HRIS, Chatbot AI</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>copyright &copy; 2023 by <span class="footer-brand">West Java Coding Camp</span></p>
+    </footer>
+
+</body>
+
+</html>
+
+
+
+<!-- ARSIP -->
+<!-- <section class="container-hero">
+        <div class="container-hero_inner">
+            <div class="container-hero_inner-image">
+                <img src="./assets/img/hero.png" alt="hero images">
+            </div>
+            <div class="container-hero_inner-headline">
+                <h1>Halo, Perkenalkan saya john seorang frontend web development</h1>
+                <small>Kunjungi saya disini :</small>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-gitlab"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-describe">
+        <div class="container-describe_inner">
+
+        </div>
+    </section> -->

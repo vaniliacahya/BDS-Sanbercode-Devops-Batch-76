@@ -1,0 +1,507 @@
+/* =============================================
+   CSS VARIABLES (Custom Properties)
+   ============================================= */
+:root {
+    --color-bg: #ffffff;
+    --color-surface: #f8f8f8;
+    --color-primary: #f5a623;       /* warm gold accent – matches logo diamond */
+    --color-primary-dark: #d4891a;
+    --color-text: #1a1a2e;
+    --color-text-muted: #6b6b80;
+    --color-border: #e8e8f0;
+    --color-white: #ffffff;
+    --color-highlight: #f5a623;
+
+    --font-main: 'Poppins', sans-serif;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.07);
+    --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.13);
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    --transition: 0.3s ease;
+    --header-height: 72px;
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+/* Fade-in animation on page load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-14px); }
+}
+
+@keyframes pulse-ring {
+    0%   { transform: scale(1);   opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes thumbsUp {
+    0%, 100% { transform: rotate(-8deg) scale(1);   }
+    50%       { transform: rotate(8deg) scale(1.15); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    height: var(--header-height);
+
+    /* Box Model */
+    padding: 0 5%;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo img {
+    display: block;
+    transition: opacity var(--transition);
+}
+
+.logo img:hover {
+    opacity: 0.8;
+}
+
+/* Navigation */
+.main-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color var(--transition);
+}
+
+/* Pseudo-class: hover */
+.nav-link:hover {
+    color: var(--color-text);
+}
+
+/* Pseudo-element: underline bar on hover/active */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+    transition: width var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+/* =============================================
+   HERO SECTION
+   ============================================= */
+.hero-section {
+    min-height: calc(100vh - var(--header-height));
+    padding: 60px 5%;
+    display: flex;
+    align-items: center;
+}
+
+.hero-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Headline side */
+.hero-headline {
+    flex: 1 1 50%;
+    animation: slideInLeft 0.8s ease both;
+}
+
+.hero-headline h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.hero-headline h1 .highlight {
+    color: var(--color-primary);
+    position: relative;
+    display: inline-block;
+}
+
+/* Pseudo-element decorative underline on highlight */
+.hero-headline h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+    opacity: 0.4;
+}
+
+.hero-headline small {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    list-style: none;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    text-decoration: none;
+    position: relative;
+    transition: color var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+/* Pseudo-class: hover on social icons */
+.social-link:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(245, 166, 35, 0.25);
+}
+
+/* Pulse ring animation on focus (accessibility) */
+.social-link:focus-visible {
+    outline: none;
+}
+
+.social-link:focus-visible::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+    animation: pulse-ring 0.8s ease forwards;
+}
+
+/* Hero image side */
+.hero-image {
+    flex: 1 1 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: slideInRight 0.8s ease both;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    /* Floating animation */
+    animation: float 4s ease-in-out infinite;
+    filter: drop-shadow(0 16px 32px rgba(0,0,0,0.10));
+}
+
+/* =============================================
+   DESCRIBE / ABOUT SECTION
+   ============================================= */
+.describe-section {
+    background-color: var(--color-surface);
+    padding: 80px 5%;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 0.2s;
+}
+
+.describe-inner {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Thumbs-up animation */
+.describe-animation {
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+
+    /* Position: relative for potential pseudo-element layers */
+    position: relative;
+}
+
+.describe-animation i {
+    font-size: 2.4rem;
+    color: var(--color-white);
+    animation: thumbsUp 2s ease-in-out infinite;
+}
+
+/* Pulsing ring behind the icon */
+.describe-animation::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid var(--color-primary);
+    opacity: 0.5;
+    animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.describe-info {
+    flex: 1;
+}
+
+.describe-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 28px 32px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+/* Pseudo-class: hover on card */
+.describe-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+}
+
+.describe-card p {
+    color: var(--color-text-muted);
+    font-size: 0.97rem;
+    line-height: 1.75;
+}
+
+/* =============================================
+   SKILLS TABLE SECTION
+   ============================================= */
+.skills-section {
+    padding: 80px 5%;
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 0.3s;
+}
+
+.skills-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 32px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 48px;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+}
+
+/* Table */
+.skills-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.skills-table thead {
+    background-color: var(--color-text);
+    color: var(--color-white);
+}
+
+.skills-table thead th {
+    padding: 16px 24px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+}
+
+.skills-table tbody tr {
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color var(--transition);
+}
+
+/* Pseudo-class: nth-child for zebra striping */
+.skills-table tbody tr:nth-child(even) {
+    background-color: var(--color-surface);
+}
+
+/* Pseudo-class: hover on table rows */
+.skills-table tbody tr:hover {
+    background-color: #fff5e4;
+}
+
+.skills-table tbody td {
+    padding: 14px 24px;
+    color: var(--color-text-muted);
+}
+
+.skills-table tbody td:first-child {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Pseudo-class: last row — no bottom border */
+.skills-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.site-footer {
+    background-color: var(--color-text);
+    color: rgba(255, 255, 255, 0.55);
+    text-align: center;
+    padding: 24px 5%;
+    font-size: 0.85rem;
+}
+
+.footer-brand {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* =============================================
+   RESPONSIVE – Flexbox reflow
+   ============================================= */
+@media (max-width: 768px) {
+    .hero-inner {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 32px;
+    }
+
+    .hero-image {
+        flex: unset;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .hero-headline {
+        flex: unset;
+        width: 100%;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .describe-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-nav ul {
+        gap: 20px;
+    }
+}

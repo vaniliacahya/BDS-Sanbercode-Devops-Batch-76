@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | John</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="./assets/css/style.css" rel="stylesheet">
+    <link href="./assets/css/portofolio.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo">
+                <img src="./assets/img/logo.png" alt="Portofolio Logo" width="150">
+            </div>
+            <nav class="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="riwayat-pribadi.html" class="nav-link">Riwayat Pribadi</a></li>
+                    <li><a href="portofolio.html" class="nav-link active">Portofolio</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero" aria-label="Judul halaman">
+            <div class="page-hero-inner">
+                <h1 class="page-hero-title">Portofolio <span class="highlight">Saya</span></h1>
+                <p class="page-hero-sub">Kumpulan proyek backend yang pernah saya kerjakan menggunakan Golang dan teknologi terkait.</p>
+
+                <!-- Filter Tabs -->
+                <div class="filter-tabs" role="tablist">
+                    <button class="filter-btn active" data-filter="all">Semua</button>
+                    <button class="filter-btn" data-filter="api">REST API</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Cards -->
+        <section class="porto-section" aria-label="Daftar proyek">
+            <div class="porto-inner">
+
+                <article class="porto-card" data-category="api">
+                    <div class="porto-card-image">
+                        <img src="https://cdn.dribbble.com/users/1963775/screenshots/17716796/media/c5fe1639953aaffe5b2884b0eec9889e.png?compress=1&resize=1200x900&vertical=top" alt="Auth Service API">
+                        <div class="porto-card-overlay">
+                            <a href="#" class="porto-card-link" aria-label="Lihat demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="#" class="porto-card-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="porto-card-body">
+                        <span class="porto-card-tag">REST API</span>
+                        <h2 class="porto-card-title">Aplikasi Kasir Smartlink</h2>
+                        <p class="porto-card-desc">Layanan kasir menggunakan Golang + Gin framework. Mendukung login via JWT, refresh token, dan OAuth2 (Google).</p>
+                        <div class="porto-card-tech">
+                            <span>Go</span><span>Gin</span><span>PostgreSQL</span><span>Redis</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="porto-card" data-category="api">
+                    <div class="porto-card-image">
+                        <img src="https://cdn.dribbble.com/users/1963775/screenshots/17716796/media/c5fe1639953aaffe5b2884b0eec9889e.png?compress=1&resize=1200x900&vertical=top" alt="Auth Service API">
+                        <div class="porto-card-overlay">
+                            <a href="#" class="porto-card-link" aria-label="Lihat demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="#" class="porto-card-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="porto-card-body">
+                        <span class="porto-card-tag">REST API</span>
+                        <h2 class="porto-card-title">HRIS</h2>
+                        <p class="porto-card-desc">Layanan managemen internal perusahaan menggunakan Golang + Gin framework. Mendukung login via JWT, refresh token, dan OAuth2 (Google).</p>
+                        <div class="porto-card-tech">
+                            <span>Go</span><span>Gin</span><span>PostgreSQL</span><span>Redis</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="porto-card" data-category="api">
+                    <div class="porto-card-image">
+                        <img src="https://cdn.dribbble.com/userupload/2377109/file/original-08c3fe7eb20327c9454a9eac0c000f7b.png" alt="URL Shortener API">
+                        <div class="porto-card-overlay">
+                            <a href="#" class="porto-card-link" aria-label="Lihat demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="#" class="porto-card-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
+                    <div class="porto-card-body">
+                        <span class="porto-card-tag">REST API</span>
+                        <h2 class="porto-card-title">KasirMudah</h2>
+                        <p class="porto-card-desc">Layanan kasir menggunakan Golang + Gin framework. Mendukung login via JWT, refresh token, dan OAuth2 (Google).</p>
+                        <div class="porto-card-tech">
+                            <span>Go</span><span>Gin</span><span>Redis</span><span>MongoDb</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>copyright &copy; 2023 by <span class="footer-brand">West Java Coding Camp</span></p>
+    </footer>
+
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards      = document.querySelectorAll('.porto-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                cards.forEach(card => {
+                    const match = filter === 'all' || card.dataset.category === filter;
+
+                    // Fade out first
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(16px)';
+
+                    setTimeout(() => {
+                        card.style.display = match ? 'flex' : 'none';
+                        if (match) {
+                            requestAnimationFrame(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            });
+                        }
+                    }, 200);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+
+
+
+<!-- ARSIP -->
+<!-- <section class="container-hero">
+        <div class="container-hero_inner">
+            <div class="container-hero_inner-image">
+                <img src="./assets/img/hero.png" alt="hero images">
+            </div>
+            <div class="container-hero_inner-headline">
+                <h1>Halo, Perkenalkan saya john seorang frontend web development</h1>
+                <small>Kunjungi saya disini :</small>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-gitlab"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-describe">
+        <div class="container-describe_inner">
+
+        </div>
+    </section> -->
