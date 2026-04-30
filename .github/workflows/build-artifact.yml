@@ -1,0 +1,28 @@
+name: Tugas 13 CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-test-secret:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Langkah untuk membuktikan pemahaman Secret & Automasi
+      - name: Eksekusi dan Cek Secret Masking
+        env:
+          SECRET_DARI_GITHUB: ${{ secrets.MY_SECRET_KEY }}
+        run: |
+          echo "Memulai pipeline otomatisasi Tugas 13..."
+          echo "Memanggil Secret Key dari pengaturan repositori:"
+          
+          # Mencetak secret, GitHub otomatis akan menyensornya menjadi ***
+          echo "Secret Key saya adalah: $SECRET_DARI_GITHUB"
+          
+          echo "Pengecekan selesai. Pipeline berhasil!"
