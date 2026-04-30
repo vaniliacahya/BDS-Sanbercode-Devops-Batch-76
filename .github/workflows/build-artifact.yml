@@ -1,0 +1,30 @@
+name: Generate Build Artifact
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Memungkinkan kamu menjalankan workflow ini secara manual dari tab Actions
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Langkah 1: Checkout kode (Opsional tapi praktik terbaik jika butuh file dari repo)
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Langkah 2: Menjalankan perintah Linux untuk membuat folder dan file
+      - name: Create dist folder and index.html
+        run: |
+          mkdir -p dist
+          echo 'Ini adalah hasil build otomatis Artifact' > dist/index.html
+
+      # Langkah 3: Mengunggah folder dist sebagai Build Artifact
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hasil-build-web
+          path: dist/
+          retention-days: 7
