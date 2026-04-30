@@ -1,30 +1,28 @@
-name: Generate Build Artifact
+name: Tugas 13 CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch: # Memungkinkan kamu menjalankan workflow ini secara manual dari tab Actions
+  workflow_dispatch:
 
 jobs:
-  build-app:
+  build-and-test-secret:
     runs-on: ubuntu-latest
     
     steps:
-      # Langkah 1: Checkout kode (Opsional tapi praktik terbaik jika butuh file dari repo)
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Langkah 2: Menjalankan perintah Linux untuk membuat folder dan file
-      - name: Create dist folder and index.html
+      # Langkah untuk membuktikan pemahaman Secret & Automasi
+      - name: Eksekusi dan Cek Secret Masking
+        env:
+          SECRET_DARI_GITHUB: ${{ secrets.MY_SECRET_KEY }}
         run: |
-          mkdir -p dist
-          echo 'Ini adalah hasil build otomatis Artifact' > dist/index.html
-
-      # Langkah 3: Mengunggah folder dist sebagai Build Artifact
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: hasil-build-web
-          path: dist/
-          retention-days: 7
+          echo "Memulai pipeline otomatisasi Tugas 13..."
+          echo "Memanggil Secret Key dari pengaturan repositori:"
+          
+          # Mencetak secret, GitHub otomatis akan menyensornya menjadi ***
+          echo "Secret Key saya adalah: $SECRET_DARI_GITHUB"
+          
+          echo "Pengecekan selesai. Pipeline berhasil!"
