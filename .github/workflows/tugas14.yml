@@ -1,0 +1,30 @@
+name: Tugas 14 CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Memungkinkan eksekusi manual
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Langkah 1: Checkout kode ke runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Langkah 2: Membuat folder dist dan file index.html di dalamnya
+      - name: Create dist folder and index.html
+        run: |
+          mkdir -p dist
+          echo 'Ini adalah hasil build otomatis Artifact' > dist/index.html
+
+      # Langkah 3: Mengunggah folder dist sebagai Build Artifact
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hasil-build-web
+          path: dist/
+          retention-days: 7
