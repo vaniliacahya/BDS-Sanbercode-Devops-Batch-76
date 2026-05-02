@@ -1,0 +1,56 @@
+name: Tugas15 Generate Artifact and Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # --- TAHAP 1: BUILD ---
+  build-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create dist folder and index.html
+        run: |
+          mkdir -p dist
+          echo 'Ini adalah hasil build otomatis Artifact untuk Tugas 15' > dist/index.html
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hasil-build-web
+          path: dist/
+          retention-days: 7
+
+  # --- TAHAP 2: DEPLOY ---
+  deploy-to-vps:
+    needs: build-app # Kriteria: Harus menunggu tahap build sukses
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: hasil-build-web
+          path: dist/
+
+      - name: Transfer Artifact ke VPS via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "dist/"
+          target: "/var/www/html/vps-van" # Path tujuan di VPS
+          strip_components: 1
+
+      - name: Execute SSH Command
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            echo "Deploy Berhasil dieksekusi di VPS!"
