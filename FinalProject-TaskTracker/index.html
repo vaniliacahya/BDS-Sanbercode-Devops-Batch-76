@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProTask - Kanban Board</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #f4f7fe;
+            --bg-board: #ffffff;
+            --primary: #4318ff;
+            --primary-hover: #3311db;
+            --text-main: #2b3674;
+            --text-muted: #a3aed1;
+            --danger: #e31a1a;
+            --card-shadow: 0px 18px 40px rgba(112, 144, 176, 0.12);
+            --border-radius: 16px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            margin: 0;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        /* Form Input Styling */
+        .task-form {
+            background: var(--bg-board);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        input[type="text"], input[type="date"], input[type="time"] {
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f8fafc;
+        }
+
+        input[type="text"] { min-width: 250px; }
+
+        input:focus {
+            border-color: var(--primary);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(67, 24, 255, 0.1);
+        }
+
+        button.add-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+            height: 43px;
+            align-self: flex-end;
+        }
+
+        button.add-btn:hover { background-color: var(--primary-hover); }
+
+        /* Kanban Board Styling */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            align-items: start;
+        }
+
+        .column {
+            background-color: var(--bg-board);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .column-header {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Indikator Warna Kolom */
+        #todo .column-header::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ffb547; }
+        #doing .column-header::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #3965ff; }
+        #done .column-header::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #05cd99; }
+
+        .card-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-bottom: 20px; /* Space untuk drop */
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #edf2f7;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            cursor: grab;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:active { cursor: grabbing; }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            padding-right: 25px; /* Space untuk tombol hapus */
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            background: #f4f7fe;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .del-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #fff0f0;
+            color: var(--danger);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s, background 0.2s;
+        }
+
+        .card:hover .del-btn { opacity: 1; }
+        .del-btn:hover { background: var(--danger); color: white; }
+
+        /* Drag over visual cue */
+        .drag-over {
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-section">
+        <h1>ProTask Board</h1>
+        
+        <div class="task-form">
+            <div class="input-group">
+                <label>Nama Tugas</label>
+                <input type="text" id="taskInput" placeholder="Desain arsitektur database...">
+            </div>
+            <div class="input-group">
+                <label>Tanggal</label>
+                <input type="date" id="dateInput">
+            </div>
+            <div class="input-group">
+                <label>Jam</label>
+                <input type="time" id="timeInput">
+            </div>
+            <button class="add-btn" onclick="tambahTugas()">+ Tambah</button>
+        </div>
+    </div>
+
+    <div class="board">
+        <div class="column" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+            <div class="column-header">To Do</div>
+            <div class="card-container" id="todo-container"></div>
+        </div>
+
+        <div class="column" id="doing" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+            <div class="column-header">In Progress</div>
+            <div class="card-container" id="doing-container"></div>
+        </div>
+
+        <div class="column" id="done" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)">
+            <div class="column-header">Completed</div>
+            <div class="card-container" id="done-container"></div>
+        </div>
+    </div>
+
+    <script>
+        const baseURL = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
+            ? 'http://localhost:8080' 
+            : window.location.origin;
+
+        const API_URL = `${baseURL}/api/todos`;
+
+        // Set default date ke hari ini
+        document.getElementById('dateInput').valueAsDate = new Date();
+
+        document.addEventListener('DOMContentLoaded', muatTugas);
+
+        async function muatTugas() {
+            try {
+                const response = await fetch(API_URL);
+                const todos = await response.json();
+                
+                document.getElementById('todo-container').innerHTML = '';
+                document.getElementById('doing-container').innerHTML = '';
+                document.getElementById('done-container').innerHTML = '';
+
+                if(todos) {
+                    todos.forEach(todo => {
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.draggable = true;
+                        card.id = `task-${todo.id}`;
+                        card.setAttribute('ondragstart', `drag(event, ${todo.id})`);
+
+                        // Format waktu jika ada
+                        let timeHtml = '';
+                        if (todo.due_date) {
+                            timeHtml += `<div class="badge">📅 ${todo.due_date}</div>`;
+                        }
+                        if (todo.due_time) {
+                            timeHtml += `<div class="badge">⏰ ${todo.due_time}</div>`;
+                        }
+
+                        card.innerHTML = `
+                            <button class="del-btn" onclick="hapusTugas(${todo.id})" title="Hapus Tugas">✖</button>
+                            <div class="card-title">${todo.title}</div>
+                            <div class="card-meta">
+                                ${timeHtml}
+                            </div>
+                        `;
+
+                        const targetContainer = document.getElementById(`${todo.status}-container`);
+                        if(targetContainer) targetContainer.appendChild(card);
+                    });
+                }
+            } catch (error) { console.error("Gagal memuat:", error); }
+        }
+
+        async function tambahTugas() {
+            const title = document.getElementById('taskInput').value.trim();
+            const date = document.getElementById('dateInput').value;
+            const time = document.getElementById('timeInput').value;
+
+            if (!title) {
+                alert("Nama tugas tidak boleh kosong!");
+                return;
+            }
+
+            const payload = {
+                title: title,
+                status: "todo",
+                due_date: date,
+                due_time: time
+            };
+
+            try {
+                await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                document.getElementById('taskInput').value = ''; 
+                document.getElementById('timeInput').value = ''; 
+                muatTugas(); 
+            } catch (error) { console.error("Gagal menambah:", error); }
+        }
+
+        async function hapusTugas(id) {
+            if(confirm("Apakah yakin ingin menghapus tugas ini?")) {
+                try {
+                    await fetch(`${API_URL}/delete?id=${id}`, { method: 'DELETE' });
+                    muatTugas(); 
+                } catch (error) { console.error("Gagal hapus:", error); }
+            }
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+            // Menambahkan efek visual saat kartu berada di atas kolom
+            let targetColumn = ev.target.closest('.column');
+            if(targetColumn) targetColumn.classList.add('drag-over');
+        }
+
+        function dragLeave(ev) {
+            // Menghapus efek visual saat kartu keluar dari area kolom
+            let targetColumn = ev.target.closest('.column');
+            if(targetColumn) targetColumn.classList.remove('drag-over');
+        }
+
+        function drag(ev, id) {
+            ev.dataTransfer.setData("taskId", id);
+        }
+
+        async function drop(ev) {
+            ev.preventDefault();
+            const taskId = ev.dataTransfer.getData("taskId");
+            
+            let targetColumn = ev.target.closest('.column');
+
+            if(targetColumn) {
+                targetColumn.classList.remove('drag-over'); // Hapus efek visual
+                const newStatus = targetColumn.id; 
+                
+                try {
+                    await fetch(`${API_URL}/update`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: parseInt(taskId), status: newStatus })
+                    });
+                    muatTugas(); 
+                } catch (error) { console.error("Gagal update:", error); }
+            }
+        }
+    </script>
+</body>
+</html>
