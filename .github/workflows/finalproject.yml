@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'FinalProject-TaskTracker/**'
-      - '.github/workflows/deploy.yml'
+      - '.github/workflows/finalproject.yml'
 
 jobs:
   build-and-deploy:
