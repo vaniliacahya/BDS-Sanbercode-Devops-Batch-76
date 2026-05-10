@@ -1,0 +1,58 @@
+name: Deploy ProTask Kanban
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'FinalProject-TaskTracker/**'
+      - '.github/workflows/deploy.yml'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v3
+
+    - name: ⚙️ Setup Go Environment
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.25.1'
+
+    - name: 🔨 Build Go Backend
+      # Pindah ke dalam folder Final Project sebelum menjalankan build
+      working-directory: ./FinalProject-TaskTracker
+      run: |
+        # Download dependency yang ada di go.mod
+        go mod tidy
+        # Build aplikasi untuk Linux VPS
+        GOOS=linux GOARCH=amd64 go build -o protask-app main.go
+
+    - name: 🚀 Copy Artifact to VPS via SCP
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: 22
+        # Mengambil file dari dalam folder FinalProject-TaskTracker
+        source: "FinalProject-TaskTracker/protask-app,FinalProject-TaskTracker/index.html"
+        target: "/var/www/protask"
+        # SANGAT PENTING: Membuang nama folder pertama saat di-copy ke VPS
+        # Agar di VPS tidak menjadi /var/www/protask/FinalProject-TaskTracker/...
+        strip_components: 1
+
+    - name: 🔄 Restart Systemd Service via SSH
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: 22
+        script: |
+          # Memberikan hak akses eksekusi pada binary
+          chmod +x /var/www/protask/protask-app
+          # Me-restart service
+          sudo systemctl restart protask.service
